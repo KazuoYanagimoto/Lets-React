@@ -33,7 +33,7 @@ var PhotoFrames = React.createClass({
 
 		return (
 			<div className="col-sm-6 col-md-4 col-lg-3 photo-frame">
-				<img className="img-responsive img-circle" src={this.props.user} style={userImage} />
+				<img id="tip" data-toggle="tooltip" data-placement="top" title={this.props.name} className="img-responsive img-circle" src={this.props.user} style={userImage} />
 				<a href={this.props.link} className="thumbnail" target="_blank">
 					<img className="img-responsive" src={this.props.img} />
 				</a>
@@ -47,6 +47,9 @@ var PhotoList = React.createClass({
 		$.ajax({
 			url: "https://api.instagram.com/v1/media/popular?access_token=3057628965.1677ed0.28fe52c52d3b4f22a30c7483063c7609",
 			dataType: 'jsonp',
+			complete: function() {
+				// $('#tip').tooltip('show');
+			},
 			success: function(response) {
 				this.setState({data: response.data});
 			}.bind(this),
@@ -57,7 +60,7 @@ var PhotoList = React.createClass({
 	},
 
 	getInitialState: function() {
-		return ({data: []});
+		return {data: []};
 	},
 
 	componentDidMount: function() {
@@ -74,7 +77,10 @@ var PhotoList = React.createClass({
 	render : function() {
 		var photoList = this.state.data.map(function(data){
 			return(
-				<PhotoFrames img={data.images.low_resolution.url} link={data.link} likes={data.likes.count} user={data.user.profile_picture} />
+				<PhotoFrames img={data.images.low_resolution.url}
+					link={data.link} likes={data.likes.count}
+					user={data.user.profile_picture}
+					name={data.user.full_name} />
 			)
 		});
 
