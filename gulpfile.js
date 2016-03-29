@@ -3,11 +3,12 @@ var gulp = require('gulp'),
     open = require("gulp-open"),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
-    port = process.env.port || 3031;
+    port = process.env.port || 3030;
 
+// browserify and transform JSX
 gulp.task('browserify', function() {
-  gulp.src('./app/src/js/components/main.js')
-      .pipe(browserify({ transform: 'reactify' }))
+    gulp.src('./app/src/js/main.js')
+      .pipe(browserify({transform: 'reactify'}))
       .pipe(gulp.dest('./app/dist/js'));
 });
 
