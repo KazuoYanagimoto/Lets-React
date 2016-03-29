@@ -12,9 +12,19 @@ var Title = React.createClass({
 	}
 });
 
+var SubTitle = React.createClass({
+	render: function() {
+		return (
+			<div className="sub-title">
+	 			<h2><small>{this.props.text}</small></h2>
+	 		</div>	
+			);
+	}
+});
+
 var PhotoFrames = React.createClass({
 	render: function() {
-		var userStyle = {
+		var userImage = {
 			position: 'absolute',
 			top: '-15px',
 			left: '-5px',
@@ -23,7 +33,7 @@ var PhotoFrames = React.createClass({
 
 		return (
 			<div className="col-sm-6 col-md-4 col-lg-3 photo-frame">
-				<img className="img-responsive img-circle" src={this.props.user} style={userStyle} />
+				<img className="img-responsive img-circle" src={this.props.user} style={userImage} />
 				<a href={this.props.link} className="thumbnail" target="_blank">
 					<img className="img-responsive" src={this.props.img} />
 				</a>
@@ -34,7 +44,7 @@ var PhotoFrames = React.createClass({
 
 var PhotoList = React.createClass({
 	loadInstagram: function() {
-	    $.ajax({
+		$.ajax({
 			url: "https://api.instagram.com/v1/media/popular?access_token=3057628965.1677ed0.28fe52c52d3b4f22a30c7483063c7609",
 			dataType: 'jsonp',
 			success: function(response) {
@@ -43,24 +53,24 @@ var PhotoList = React.createClass({
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
-	    });
-  	},
- 
-  	getInitialState: function() {
-    	return {data: []};
-  	},
+		});
+	},
 
-  	componentDidMount: function() {
-    	this.loadInstagram();
-  	},
+	getInitialState: function() {
+		return ({data: []});
+	},
 
-  	loadNewPhotos: function() {
-  		var loadInstagram = this.loadInstagram();
-  		$('.photo-frame').fadeOut(500, function(){
-  			loadInstagram;
-  		}).fadeIn(1500);
-  	},
- 
+	componentDidMount: function() {
+		this.loadInstagram();
+	},
+
+	loadNewPhotos: function() {
+		var loadInstagram = this.loadInstagram();
+		$('.photo-frame').fadeOut(500, function(){
+			loadInstagram;
+		}).fadeIn(1500);
+	},
+
 	render : function() {
 		var photoList = this.state.data.map(function(data){
 			return(
@@ -73,12 +83,14 @@ var PhotoList = React.createClass({
 				<div className="row">
 					<div className="jumbotron text-center col-md-12">
 						<Title text="Instagram Photo Viewer" />
-						<h2><small>This is demo site to showcase React with Instagram  API.</small></h2>
-						<button className="btn btn-primary btn-lg" onClick={this.loadNewPhotos}>
-							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-							&nbsp;Load Popular Photos&nbsp;
-							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-				 		</button>
+						<SubTitle text="This is demo site to showcase React with Instagram  API." />
+						<div className="button-group">
+							<button className="btn btn-primary btn-lg" onClick={this.loadNewPhotos}>
+								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+								&nbsp;Load Popular Photos&nbsp;
+								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+					 		</button>
+						</div>
 					</div>
 				</div>
 				<div className="row">
@@ -91,5 +103,8 @@ var PhotoList = React.createClass({
 
 React.renderComponent(
 	<PhotoList />,
-	document.getElementById('app')
+	document.getElementById('app'),
+	function(){
+		console.log('Hello, Instagram!');
+	}
 );
