@@ -1,5 +1,5 @@
 # Lets-React
-> Starter template for creating web-app powered by React. 
+> A simple photo viewer using Instagram API powered by React. 
 
 ## To Start Project
 1: Clone this repository, where `myapp` is the name of your project
