@@ -9,7 +9,7 @@ var PhotoList = React.createClass({
 			url: "https://api.instagram.com/v1/media/popular?access_token=3057628965.1677ed0.28fe52c52d3b4f22a30c7483063c7609",
 			dataType: 'jsonp',
 			complete: function() {
-				// $('#tip').tooltip('show');
+				$('.tips').tooltip();
 			},
 			success: function(response) {
 				this.setState({data: response.data});
@@ -18,6 +18,7 @@ var PhotoList = React.createClass({
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
+		$('.tips').tooltip('destroy');
 	},
 
 	getInitialState: function() {
@@ -28,18 +29,13 @@ var PhotoList = React.createClass({
 		this.loadInstagram();
 	},
 
-	loadNewPhotos: function() {
-		var loadInstagram = this.loadInstagram();
-		$('.photo-frame').fadeOut(500, function(){
-			loadInstagram;
-		}).fadeIn(1500);
-	},
-
 	render : function() {
 		var photoList = this.state.data.map(function(data){
+			// console.log(data)
 			return(
 				<PhotoFrame img={data.images.low_resolution.url}
-					link={data.link} likes={data.likes.count}
+					link={data.link}
+					likes={data.likes.count}
 					user={data.user.profile_picture}
 					name={data.user.full_name} />
 			)
@@ -52,7 +48,7 @@ var PhotoList = React.createClass({
 						<div className="jumbotron text-center">
 							<h1>Instagram Photo Viewer!</h1>
 							<p>This is demo site to showcase React with Instagram  API.</p>
-							<button className="btn btn-primary btn-lg" onClick={this.loadNewPhotos}>
+							<button className="btn btn-primary btn-lg" onClick={this.loadInstagram}>
 								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
 								&nbsp;Load Popular Photos&nbsp;
 								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
