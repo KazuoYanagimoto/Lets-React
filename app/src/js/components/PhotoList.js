@@ -42,24 +42,20 @@ var PhotoList = React.createClass({
 		});
 
 		return(
-			<div className="wrapper">
-				<div className="container-fluid">
-					<div className="row">
-						<div className="jumbotron text-center">
-							<h1>Instagram Photo Viewer!</h1>
-							<p>This is demo site to showcase React with Instagram  API.</p>
-							<button className="btn btn-primary btn-lg" onClick={this.loadInstagram}>
-								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-								&nbsp;Load Popular Photos&nbsp;
-								<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-					 		</button>
-						</div>
+			<div className="container">
+				<div className="row">
+					<div className="jumbotron text-center">
+						<h1>Instagram Photo Viewer!</h1>
+						<p>This is demo site to showcase React with Instagram  API.</p>
+						<button className="btn btn-primary btn-lg" onClick={this.loadInstagram}>
+							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+							&nbsp;Load Popular Photos&nbsp;
+							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+				 		</button>
 					</div>
 				</div>
-				<div className="container">
-					<div className="row">
-						{photoList}
-					</div>
+				<div className="row">
+					{photoList}
 				</div>
 			</div>
 			);
