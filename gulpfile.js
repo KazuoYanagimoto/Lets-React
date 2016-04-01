@@ -3,7 +3,15 @@ var gulp = require('gulp'),
     open = require("gulp-open"),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
+    sass = require('gulp-sass'),
     port = process.env.port || 3030;
+
+// convert sass file to css
+gulp.task('sass', function () {
+  return gulp.src('./app/src/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./app/dist/css'));
+});
 
 // browserify and transform JSX
 gulp.task('browserify', function() {
@@ -30,6 +38,12 @@ gulp.task('connect', function() {
   });
 });
 
+// live reload css
+gulp.task('css', function () {
+  gulp.src('./app/dist/**/*.css')
+    .pipe(connect.reload());
+});
+
 // live reload js
 gulp.task('js', function () {
   gulp.src('./app/dist/**/*.js')
@@ -44,6 +58,8 @@ gulp.task('html', function () {
 
 // watch files for live reload
 gulp.task('watch', function() {
+    gulp.watch('app/dist/css/*.css', ['css']);
+    gulp.watch('app/src/sass/*.scss', ['sass']);
     gulp.watch('app/dist/js/*.js', ['js']);
     gulp.watch('app/index.html', ['html']);
     gulp.watch('app/src/js/**/*.js', ['browserify']);
@@ -51,4 +67,4 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['browserify']);
 
-gulp.task('serve', ['browserify', 'connect', 'open', 'watch']);
+gulp.task('serve', ['sass', 'browserify', 'connect', 'open', 'watch']);
