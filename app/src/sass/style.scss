@@ -1,6 +1,13 @@
 body{
 	background: #fafafa;
-	.container{
-		// background: aqua;
+}
+.row{
+	.blur{
+		-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+		filter: grayscale(100%);
+		&:hover{
+			-webkit-filter: grayscale(0%); /* Chrome, Safari, Opera */
+			filter: grayscale(0%);
+		}
 	}
 }
