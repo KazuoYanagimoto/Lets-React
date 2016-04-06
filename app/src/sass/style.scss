@@ -3,11 +3,11 @@ body{
 }
 .row{
 	.blur{
-		-webkit-filter: grayscale(100%) blur(1px); /* Chrome, Safari, Opera */
-		filter: grayscale(100%) blur(1px);
+		-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+		filter: grayscale(100%);
 		&:hover{
-			-webkit-filter: grayscale(0%) blur(0px); /* Chrome, Safari, Opera */
-			filter: grayscale(0%) blur(0px);
+			-webkit-filter: grayscale(0%); /* Chrome, Safari, Opera */
+			filter: grayscale(0%);
 		}
 	}
 }
