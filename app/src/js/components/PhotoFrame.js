@@ -19,7 +19,7 @@ var PhotoFrame = React.createClass({
 		}
 
 		return (
-			<div className="col-sm-6 col-md-4 col-lg-3">
+			<div className="col-sm-6 col-md-4 col-lg-3 blur">
 				<img data-toggle="tooltip" data-placement="top" title={fullName} className="img-responsive img-circle tips" src={this.props.user} style={userImage} />
 				<a href={this.props.link} className="thumbnail" target="_blank">
 					<img className="img-responsive" src={this.props.img} />

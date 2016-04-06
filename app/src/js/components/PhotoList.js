@@ -29,9 +29,12 @@ var PhotoList = React.createClass({
 		this.loadInstagram();
 	},
 
+	componentDidUpdate: function() {
+		// this.loadInstagram();
+	},
+
 	render : function() {
 		var photoList = this.state.data.map(function(data){
-			// console.log(data)
 			return(
 				<PhotoFrame img={data.images.low_resolution.url}
 					link={data.link}
@@ -49,7 +52,7 @@ var PhotoList = React.createClass({
 						<p>This is demo site to showcase React with Instagram  API.</p>
 						<button className="btn btn-primary btn-lg" onClick={this.loadInstagram}>
 							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-							&nbsp;Load Popular Photos&nbsp;
+							&nbsp; Load Popular Photos &nbsp;
 							<span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
 				 		</button>
 					</div>
