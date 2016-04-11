@@ -13,6 +13,7 @@ var PhotoList = React.createClass({
 			},
 			success: function(response) {
 				this.setState({data: response.data});
+				// console.log(response.data[0])
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -35,12 +36,19 @@ var PhotoList = React.createClass({
 
 	render : function() {
 		var photoList = this.state.data.map(function(data){
+			// console.log(data)
+			if(data.type === 'image'){
+				media = 'glyphicon glyphicon-picture'
+			} else{
+				media = 'glyphicon glyphicon-film'
+			}
 			return(
 				<PhotoFrame img={data.images.low_resolution.url}
 					link={data.link}
 					likes={data.likes.count}
 					user={data.user.profile_picture}
-					name={data.user.full_name} />
+					name={data.user.full_name}
+					type={media} />
 			)
 		});
 

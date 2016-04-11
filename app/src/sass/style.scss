@@ -2,12 +2,17 @@ body{
 	background: #fafafa;
 }
 .row{
-	.blur{
+	.filter{
 		-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
 		filter: grayscale(100%);
 		&:hover{
 			-webkit-filter: grayscale(0%); /* Chrome, Safari, Opera */
 			filter: grayscale(0%);
+		}
+		.thumbnail{
+			span{
+				float: right;
+			}
 		}
 	}
 }
